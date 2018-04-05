@@ -49,7 +49,8 @@ param_grid = [
     {'weights': ['uniform', 'distance'], 'n_neighbors': [3, 5, 7]}
 ]
 
-grid_search = GridSearchCV(knn_clf, param_grid, cv = 3)
+print("Beginning gridsearch")
+grid_search = GridSearchCV(knn_clf, param_grid, cv = 3, n_jobs = -1, verbose = 2)
 grid_search
 
 
@@ -58,6 +59,7 @@ grid_search
 
 grid_search.fit(x_train, y_train)
 
+print("Gridsearch done; writing state")
 save_state = shelve.open("03_exercise_01_state_01")
 save_state["grid"] = grid_search
 save_state["knn_clf"] = knn_clf
